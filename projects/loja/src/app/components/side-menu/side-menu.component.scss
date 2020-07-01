@@ -1,0 +1,14 @@
+.side-menu {
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #ccc;
+    overflow-x: hidden;
+
+    &__title {
+        font-weight: bold;
+        text-align: center;
+    }
+}

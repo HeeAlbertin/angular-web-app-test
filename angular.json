@@ -28,7 +28,8 @@
               "projects/loja/src/assets"
             ],
             "styles": [
-              "projects/loja/src/styles.scss"
+              "projects/loja/src/styles.scss",
+              "projects/loja/src/fonts.scss"
             ],
             "scripts": []
           },
