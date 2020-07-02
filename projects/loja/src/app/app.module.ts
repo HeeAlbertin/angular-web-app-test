@@ -3,22 +3,18 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SideMenuComponent } from './components/side-menu/side-menu.component';
-import { ProductCardComponent } from './components/products/product-card/product-card.component';
-import { ProductDetailComponent } from './components/products/product-detail/product-detail.component';
-import { ProductListComponent } from './components/products/product-list/product-list.component';
+import { SideMenuComponent } from './side-menu/side-menu.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SideMenuComponent,
-    ProductCardComponent,
-    ProductDetailComponent,
-    ProductListComponent
+    SideMenuComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

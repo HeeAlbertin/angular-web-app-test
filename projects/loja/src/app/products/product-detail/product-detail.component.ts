@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ParamMap, ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
-import { Observable, of } from 'rxjs';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-product-detail',
