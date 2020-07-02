@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { BsModalService, BsModalRef, ModalModule } from 'ngx-bootstrap/modal';
 import { LoginModalComponent } from './login-modal.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 describe('LoginModalComponent', () => {
   let component: LoginModalComponent;
@@ -8,7 +9,16 @@ describe('LoginModalComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LoginModalComponent ]
+      providers: [
+        BsModalRef,
+        BsModalService
+      ],
+      declarations: [ LoginModalComponent ],
+      imports: [
+        ModalModule.forRoot(), 
+        FormsModule,
+        ReactiveFormsModule
+      ]
     })
     .compileComponents();
   }));

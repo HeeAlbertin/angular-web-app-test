@@ -1,18 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LoginModalComponent } from './login/login-modal/login-modal.component';
-import { LoginButtonComponent } from './login/login-button/login-button.component';
+import { LoginModalComponent } from './components/login/login-modal/login-modal.component';
 import { ModalModule, BsModalRef } from 'ngx-bootstrap/modal';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [LoginModalComponent, LoginButtonComponent],
+  declarations: [LoginModalComponent],
   imports: [
     CommonModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    FormsModule,
+    ReactiveFormsModule,
+    BsModalRef
   ],
   exports: [
-    LoginModalComponent,
-    LoginButtonComponent
+    LoginModalComponent
   ],
   providers: [
     BsModalRef

@@ -8,7 +8,9 @@
             <span routerLink="/products" routerLinkActive="active">Produtos</span>
         </li>
         <li>
-            <app-login-button></app-login-button>
+            <button class="login-button" (click)="openLoginModal()">
+                Entrar
+            </button>
         </li>
     </ul>
 </div>

@@ -29,7 +29,8 @@
             ],
             "styles": [
               "projects/loja/src/styles.scss",
-              "projects/loja/src/fonts.scss"
+              "projects/loja/src/fonts.scss",
+              "projects/loja/src/modals.scss"
             ],
             "scripts": []
           },
