@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { LoginModalController } from './login-modal.controller';
 
 @Component({
   selector: 'app-login-modal',
@@ -14,7 +15,7 @@ export class LoginModalComponent implements OnInit {
   constructor(
     private bsModalRef: BsModalRef,
     private formBuilder: FormBuilder,
-
+    private loginController: LoginModalController
   ) {
     this.loginForm = this.formBuilder.group({
       email: ['', Validators.required],
@@ -30,6 +31,12 @@ export class LoginModalComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.loginForm.value);
+    const loginResult = this.loginController.doLogin(this.loginForm.value);
+
+    if (loginResult) {
+      this.close();
+    } else {
+      alert('Login inválido!')
+    }
   }
 }

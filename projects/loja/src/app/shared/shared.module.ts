@@ -10,8 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     ModalModule.forRoot(),
     FormsModule,
-    ReactiveFormsModule,
-    BsModalRef
+    ReactiveFormsModule
   ],
   exports: [
     LoginModalComponent
