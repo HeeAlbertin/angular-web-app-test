@@ -16,8 +16,14 @@ export class LoginService {
   ) { }
 
   public openLoginModal() {
-    this.modalService.config.animated = false;
-    this.bsModalRef = this.modalService.show(LoginModalComponent, {});
+    return new Promise((resolve) => {
+      this.modalService.config.animated = false;
+      this.bsModalRef = this.modalService.show(LoginModalComponent, {});
+      this.bsModalRef.content.onClose.subscribe((value: boolean) => {
+        resolve(value)
+      });
+    });
+    
   }
 
   public async alreadyLoggedIn(): Promise<boolean> {

@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ProductsModel } from '../../../components/products/products.model';
 import { LoginService } from '../../services/login/login.service';
 import { AddItemsController } from './add-items.controller';
+import { LoginModalController } from '../login/login-modal/login-modal.controller';
 
 @Component({
   selector: 'app-add-items',
@@ -20,6 +21,7 @@ export class AddItemsComponent implements OnInit {
   
   constructor(
     private loginService: LoginService,
+    private loginController: LoginModalController,
     private addItemsController: AddItemsController
   ) { 
     this.loggedInInfo();
@@ -27,6 +29,9 @@ export class AddItemsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loginController.userLoggedInObs.subscribe((loggedIn: boolean) => {
+      this.loggedIn = loggedIn;
+    });
   }
 
   loggedInInfo() {
@@ -46,15 +51,23 @@ export class AddItemsComponent implements OnInit {
 
   addItem() {
     if (this.loggedIn) {
-      if (this.product && this.quantity + 1 <= this.product.originalStorage) {
-        this.quantity++;
-        this.addItemsController.addItem(this.product.id);
-        this.emitEvents();
-      } else {
-        alert('Sem estoque!');
-      }
+      this.addCurrentProduct();
     } else {
-      this.loginService.openLoginModal();
+      this.loginService.openLoginModal().then((result) => {
+        if (result) {
+          this.addCurrentProduct();
+        }
+      });
+    }
+  }
+
+  addCurrentProduct() {
+    if (this.product && this.quantity + 1 <= this.product.originalStorage) {
+      this.quantity++;
+      this.addItemsController.addItem(this.product.id);
+      this.emitEvents();
+    } else {
+      alert('Sem estoque!');
     }
   }
 

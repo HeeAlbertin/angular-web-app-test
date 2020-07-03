@@ -73,10 +73,11 @@ export class AddItemsRepository {
         const cartProducts = await this.getAllCartProducts();
         // com reduce não funcionou por possibilidade de undefined
         let total = 0;
-        cartProducts.forEach((p: ProductsModel) => {
-            if (p.quantity)
-                total += p.quantity
-        });
+        if (cartProducts)
+            cartProducts.forEach((p: ProductsModel) => {
+                if (p.quantity)
+                    total += p.quantity
+            });
         return total;
     }
 }

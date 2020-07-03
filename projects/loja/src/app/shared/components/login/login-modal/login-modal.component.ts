@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginModalController } from './login-modal.controller';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-login-modal',
@@ -9,6 +10,8 @@ import { LoginModalController } from './login-modal.controller';
   styleUrls: ['./login-modal.component.scss']
 })
 export class LoginModalComponent implements OnInit {
+
+  public onClose: Subject<boolean>;
 
   loginForm: FormGroup;
 
@@ -21,12 +24,15 @@ export class LoginModalComponent implements OnInit {
       email: ['', Validators.required],
       password: ['', Validators.required]
     });
+
+    this.onClose = new Subject();
   }
 
   ngOnInit(): void {
   }
 
   close() {
+    this.onClose.next(false);
     this.bsModalRef.hide();
   }
 
@@ -34,7 +40,8 @@ export class LoginModalComponent implements OnInit {
     const loginResult = this.loginController.doLogin(this.loginForm.value);
 
     if (loginResult) {
-      this.close();
+      this.onClose.next(true);
+      this.bsModalRef.hide();
     } else {
       alert('Login inválido!')
     }
