@@ -1,0 +1,15 @@
+<div *ngIf="product">
+
+    <div *ngIf="quantity > 0; then quantityBlock else emptyBlock"></div>
+    
+    <ng-template #quantityBlock>
+        <button class="btn btn-primary" (click)="removeItem()">-</button>
+        {{ quantity }}
+        <button class="btn btn-primary" (click)="addItem()">+</button>
+    </ng-template>
+
+    <ng-template #emptyBlock>
+        <button class="btn btn-primary" (click)="addItem()"> + Adicionar item </button>
+    </ng-template>
+    
+</div>

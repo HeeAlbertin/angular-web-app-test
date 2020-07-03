@@ -1,3 +1,4 @@
 <div class="product-list">
     <h1 class="product-list__title">Produtos</h1>
+    <app-product-card *ngFor="let product of products; index as i" [product]="product"></app-product-card>
 </div>

@@ -9,7 +9,9 @@
         </li>
         <div *ngIf="loggedIn; then loggedInBlock else notLoggedInBlock"></div>
         <ng-template #loggedInBlock>
-            Carrinho
+            <li>
+                <span routerLink="/cart" routerLinkActive="active">Carrinho</span>
+            </li>
         </ng-template>
         <ng-template #notLoggedInBlock>
             <li>

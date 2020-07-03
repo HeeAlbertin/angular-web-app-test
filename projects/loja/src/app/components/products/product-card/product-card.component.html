@@ -1,0 +1,15 @@
+<div class="product-card" *ngIf="product">
+    <div class="product-card__header">
+        <h3>{{product.name}}</h3>
+    </div>
+
+    <div class="product-card__body">
+        <p>Preço: {{product.price | currency:'BRL':true}}</p>
+    </div>
+
+    <div class="product-card__footer">
+        <app-add-items [product]="product"></app-add-items>
+        <button class="btn btn-primary" (click)="goToDetails(product.id)">Ver mais</button>
+    </div>
+</div>
+    

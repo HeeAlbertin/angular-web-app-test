@@ -1,6 +1,8 @@
-export interface ProdutosModel {
+export interface ProductsModel {
     id: number,
-    nome: string,
-    preco: number,
-    estoque: number
+    name: string,
+    price: number,
+    description: string,
+    originalStorage: number
+    quantity?: number,
 }
