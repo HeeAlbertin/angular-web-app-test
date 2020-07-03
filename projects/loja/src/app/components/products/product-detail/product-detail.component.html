@@ -1,2 +1,36 @@
-<p>product-detail works!</p>
-<h2>{{product}}</h2>
+<div class="product-detail" *ngIf="product">
+    <div class="product-detail__content">
+        <div class='row'>
+            <div class='column'>
+                <div class="product-detail__image">
+                    <span class="product-detail__image--text">Área para Imagem</span>
+                </div>
+            </div>
+            <div class='column'>
+                <h2>{{ product.name }}</h2>
+
+                <p>Código {{ product.id }}</p>
+
+                <p>{{ product.description }}</p>
+            </div>
+            <div class="column">
+                <h3>Comprar por {{ product.price | currency:'BRL':true }}</h3>
+                <h4>Total: {{ product.price * quantity | currency:'BRL':true }}</h4>
+                <div class="product-detail__storage">
+                    <span>Em estoque: {{ product.originalStorage }}</span>
+                </div>
+
+                <app-add-items [product]="product" (setQuantity)="setQuantity($event)" (applyDiscount)='applyDiscount($event)'></app-add-items>
+
+                <div class="product-detail__discount">
+                    <div *ngIf="!showDiscount" class="product-detail__discount--without">
+                        <p>Aviso: Comprar abaixo de 10 itens não tem desconto</p>
+                    </div>
+                    <div *ngIf="showDiscount" class="product-detail__discount--with">
+                        <p>Seu desconto aparecerá no checkout</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

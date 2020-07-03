@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { BsModalService, BsModalRef, ModalModule } from 'ngx-bootstrap/modal';
 import { SideMenuComponent } from './side-menu.component';
 
 describe('SideMenuComponent', () => {
@@ -8,7 +8,12 @@ describe('SideMenuComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SideMenuComponent ]
+      declarations: [ SideMenuComponent ],
+      providers: [
+        BsModalRef,
+        BsModalService
+      ],
+      imports: [ModalModule.forRoot()]
     })
     .compileComponents();
   }));

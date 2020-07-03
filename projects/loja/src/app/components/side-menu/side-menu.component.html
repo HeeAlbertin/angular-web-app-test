@@ -2,4 +2,25 @@
     <h1 class="side-menu__title">
         Loja Teste
     </h1>
+
+    <ul class="side-menu__nav">
+        <li>
+            <span routerLink="/products" routerLinkActive="active">Produtos</span>
+        </li>
+        <div *ngIf="loggedIn; then loggedInBlock else notLoggedInBlock"></div>
+        <ng-template #loggedInBlock>
+            <li>
+                <span routerLink="/cart" routerLinkActive="active">Carrinho</span>
+                <span class="side-menu__nav--badge" *ngIf="totalItems > 0">{{totalItems}}</span>
+            </li>
+        </ng-template>
+        <ng-template #notLoggedInBlock>
+            <li>
+                <button class="login-button" (click)="openLoginModal()">
+                    Entrar
+                </button>
+            </li>
+        </ng-template>
+
+    </ul>
 </div>

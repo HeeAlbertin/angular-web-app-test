@@ -1,0 +1,35 @@
+<div class="product-cart">
+    <h1 class="product-cart__title">Carrinho</h1>
+    <div class="product-cart__content" *ngIf="products">
+        <div class='row' *ngFor="let product of products; index as i">
+            <div class='column'>
+                <div class="product-cart__image">
+                    <span class="product-cart__image--text">Área para Imagem</span>
+                </div>
+            </div>
+            <div class='column'>
+                <h2>{{ product.name }}</h2>
+
+                <p>Código {{ product.id }}</p>
+            </div>
+            <div class="column">
+                <h4>Total: <span *ngIf="product.quantity">{{ product.price * product.quantity | currency:'BRL':true }}</span></h4>
+                <div class="product-cart__storage">
+                    <span>Em estoque: {{ product.originalStorage }}</span>
+                </div>
+
+                <app-add-items [product]="product" (setQuantity)="setQuantity($event, product)" (applyDiscount)='applyDiscount($event, product)'></app-add-items>
+            </div>
+            <div class="column">
+                <div class="product-cart__discount">
+                    <div *ngIf="!product.showDiscount" class="product-cart__discount--without">
+                        <p>Aviso: Comprar abaixo de 10 itens não tem desconto</p>
+                    </div>
+                    <div *ngIf="product.showDiscount" class="product-cart__discount--with">
+                        <p>Seu desconto aparecerá no checkout</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
