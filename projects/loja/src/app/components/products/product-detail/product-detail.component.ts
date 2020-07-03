@@ -4,6 +4,7 @@ import { switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { ProductsModel } from '../products.model';
 import { ProductDetailController } from './product-detail.controller';
+import { AddItemsController } from '../../../shared/components/add-items/add-items.controller';
 
 @Component({
   selector: 'app-product-detail',
@@ -14,13 +15,16 @@ export class ProductDetailComponent implements OnInit {
 
   product: ProductsModel | undefined;
   showDiscount: boolean;
+  quantity: number;
   private sub: any;
 
   constructor(
     private route: ActivatedRoute,
-    private productDetailController: ProductDetailController
+    private productDetailController: ProductDetailController,
+    private addItemsController: AddItemsController
   ) {
     this.showDiscount = false;
+    this.quantity = 0;
   } 
 
   ngOnInit() {
@@ -31,6 +35,7 @@ export class ProductDetailComponent implements OnInit {
     ).subscribe((id) => {
       if (id) {
         this.product = this.getProduct(+id);
+        this.getQuantity(+id);
       }
     });
   }
@@ -41,6 +46,18 @@ export class ProductDetailComponent implements OnInit {
 
   getProduct(id: number): ProductsModel {
     return this.productDetailController.getProduct(id);
+  }
+
+  async getQuantity(id: number) {
+    this.quantity = await this.addItemsController.getQuantity(id);
+    
+    if (this.quantity >= 10) {
+      this.applyDiscount(true);
+    }
+  }
+
+  setQuantity(quantity: number) {
+    this.quantity = quantity;
   }
 
   applyDiscount(apply: boolean) { 

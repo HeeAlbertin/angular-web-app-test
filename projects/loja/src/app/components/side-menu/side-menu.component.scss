@@ -17,6 +17,16 @@
         list-style-type: none;
         margin: 0;
         padding: 0;
+
+        &--badge {
+            background-color: #000;
+            color: #fff;
+            border-radius: 50%;
+            margin-left: 10px;
+            display: inline-block;
+            width: 25px;
+            text-align: center;
+        }
     }
 
     .login-button {

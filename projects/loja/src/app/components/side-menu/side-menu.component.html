@@ -11,6 +11,7 @@
         <ng-template #loggedInBlock>
             <li>
                 <span routerLink="/cart" routerLinkActive="active">Carrinho</span>
+                <span class="side-menu__nav--badge" *ngIf="totalItems > 0">{{totalItems}}</span>
             </li>
         </ng-template>
         <ng-template #notLoggedInBlock>

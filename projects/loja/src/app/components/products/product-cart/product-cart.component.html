@@ -18,14 +18,14 @@
                     <span>Em estoque: {{ product.originalStorage }}</span>
                 </div>
 
-                <app-add-items [product]="product" (applyDiscount)='applyDiscount($event)'></app-add-items>
+                <app-add-items [product]="product" (setQuantity)="setQuantity($event, product)" (applyDiscount)='applyDiscount($event, product)'></app-add-items>
             </div>
             <div class="column">
                 <div class="product-cart__discount">
-                    <div *ngIf="!showDiscount" class="product-cart__discount--without">
+                    <div *ngIf="!product.showDiscount" class="product-cart__discount--without">
                         <p>Aviso: Comprar abaixo de 10 itens não tem desconto</p>
                     </div>
-                    <div *ngIf="showDiscount" class="product-cart__discount--with">
+                    <div *ngIf="product.showDiscount" class="product-cart__discount--with">
                         <p>Seu desconto aparecerá no checkout</p>
                     </div>
                 </div>

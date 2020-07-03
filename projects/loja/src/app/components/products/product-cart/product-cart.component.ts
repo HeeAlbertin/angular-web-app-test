@@ -9,13 +9,11 @@ import { ProductsModel } from '../products.model';
 })
 export class ProductCartComponent implements OnInit {
 
-  showDiscount: boolean;
   products: ProductsModel[] | undefined;
 
   constructor(
     private productsRepository: ProductsRepository
   ) { 
-    this.showDiscount = false;
   }
 
   ngOnInit(): void {
@@ -25,10 +23,14 @@ export class ProductCartComponent implements OnInit {
   getAllCartProducts() {
     this.productsRepository.getAllCartProducts().then((products: ProductsModel[]) => {
       this.products = products;
-    })
+    });
   }
 
-  applyDiscount(apply: boolean) { 
-    this.showDiscount = apply;
+  applyDiscount(apply: boolean, product: ProductsModel) { 
+    product.showDiscount = apply;
+  }
+
+  setQuantity(quantity: number, product: ProductsModel) {
+    product.quantity = quantity;
   }
 }

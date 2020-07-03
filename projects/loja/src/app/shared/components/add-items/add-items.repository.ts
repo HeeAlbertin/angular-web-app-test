@@ -44,7 +44,8 @@ export class AddItemsRepository {
         if (cartProducts) {
             let actualProduct = cartProducts.find((p: ProductsModel) => p.id == id);
             if (actualProduct) {
-                actualProduct.quantity++
+                actualProduct.quantity++;
+                actualProduct.showDiscount = actualProduct.quantity >= 10;
             } else {
                 cartProducts.push(currentProduct);
             }
@@ -62,8 +63,20 @@ export class AddItemsRepository {
         const currentProduct = cartProducts.find((p: ProductsModel) => p.id == id);
 
         currentProduct.quantity--;
+        currentProduct.showDiscount = currentProduct.quantity >= 10;
 
         this.dataStorageService.store(DATA_STORAGE.PRODUTO, cartProducts);
         return currentProduct.quantity;
+    }
+
+    async getTotalQuantity(): Promise<number> {
+        const cartProducts = await this.getAllCartProducts();
+        // com reduce não funcionou por possibilidade de undefined
+        let total = 0;
+        cartProducts.forEach((p: ProductsModel) => {
+            if (p.quantity)
+                total += p.quantity
+        });
+        return total;
     }
 }

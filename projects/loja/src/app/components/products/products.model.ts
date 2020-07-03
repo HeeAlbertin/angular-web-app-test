@@ -5,4 +5,5 @@ export interface ProductsModel {
     description: string,
     originalStorage: number
     quantity?: number,
+    showDiscount?: boolean
 }

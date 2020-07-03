@@ -12,6 +12,8 @@ export class AddItemsComponent implements OnInit {
 
   @Input() product: ProductsModel | undefined;
   @Output() applyDiscount = new EventEmitter<boolean>();
+  @Output() setQuantity = new EventEmitter<number>();
+  
 
   loggedIn = false;
   quantity: number;
@@ -47,7 +49,7 @@ export class AddItemsComponent implements OnInit {
       if (this.product && this.quantity + 1 <= this.product.originalStorage) {
         this.quantity++;
         this.addItemsController.addItem(this.product.id);
-        this.emitApplyDiscount();
+        this.emitEvents();
       } else {
         alert('Sem estoque!');
       }
@@ -60,11 +62,12 @@ export class AddItemsComponent implements OnInit {
     if (this.product) {
       this.quantity--;
       this.addItemsController.removeItem(this.product.id);
-      this.emitApplyDiscount();
+      this.emitEvents();
     }
   }
 
-  emitApplyDiscount() {
+  emitEvents() {
     this.quantity >= 10 ? this.applyDiscount.emit(true) : this.applyDiscount.emit(false);
+    this.setQuantity.emit(this.quantity);
   }
 }

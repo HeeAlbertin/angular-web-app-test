@@ -15,12 +15,12 @@
             </div>
             <div class="column">
                 <h3>Comprar por {{ product.price | currency:'BRL':true }}</h3>
-                <h4>Total: <span *ngIf="product.quantity">{{ product.price * product.quantity | currency:'BRL':true }}</span></h4>
+                <h4>Total: {{ product.price * quantity | currency:'BRL':true }}</h4>
                 <div class="product-detail__storage">
-                    <span>Em estoque: {{ product.quantity }}</span>
+                    <span>Em estoque: {{ product.originalStorage }}</span>
                 </div>
 
-                <app-add-items [product]="product" (applyDiscount)='applyDiscount($event)'></app-add-items>
+                <app-add-items [product]="product" (setQuantity)="setQuantity($event)" (applyDiscount)='applyDiscount($event)'></app-add-items>
 
                 <div class="product-detail__discount">
                     <div *ngIf="!showDiscount" class="product-detail__discount--without">
